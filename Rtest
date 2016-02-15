@@ -1,0 +1,26 @@
+-parseXml <- function(base, internal) {
+-    invisible(.Call('readxl_parseXml', PACKAGE = 'readxl', base, internal))
+-}
+-
+-countRows <- function(base, sheet) {
+-    .Call('readxl_countRows', PACKAGE = 'readxl', base, sheet)
+-}
+-
+ xls_formats <- function(path) {
+     .Call('readxl_xls_formats', PACKAGE = 'readxl', path)
+ }
+@@ -65,6 +57,14 @@ read_xlsx_ <- function(path, sheet, col_names, col_types, na, nskip = 0L) {
+     .Call('readxl_read_xlsx_', PACKAGE = 'readxl', path, sheet, col_names, col_types, na, nskip)
+ }
+ 
++parseXml <- function(base, internal) {
++    invisible(.Call('readxl_parseXml', PACKAGE = 'readxl', base, internal))
++}
++
++countRows <- function(base, sheet) {
++    .Call('readxl_countRows', PACKAGE = 'readxl', base, sheet)
++}
++
+ zip_xml <- function(zip_path, file_path) {
+     invisible(.Call('readxl_zip_xml', PACKAGE = 'readxl', zip_path, file_path))
+ }
