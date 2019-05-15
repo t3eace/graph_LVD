@@ -1,0 +1,147 @@
+
+<!DOCTYPE>
+
+<html>
+
+  <head>
+    <title>cytoscape-fcose.js demo</title>
+
+      <meta name='viewport' content='width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1'>
+
+      <script src='https://unpkg.com/cytoscape/dist/cytoscape.min.js'></script>
+      <script src='https://unpkg.com/numeric/numeric-1.2.6.js'></script>
+      <script src='https://unpkg.com/layout-base/layout-base.js'></script>
+      <script src='https://unpkg.com/cose-base/cose-base.js'></script>
+
+      <!-- for testing with local version of cytoscape.js -->
+      <!--<script src='../cytoscape.js/build/cytoscape.js'></script>-->
+
+      <script src='cytoscape-fcose.js'></script>
+
+      <style>
+        body {
+          font-family: helvetica neue, helvetica, liberation sans, arial, sans-serif;
+          font-size: 14px;
+        }
+
+        #cy {
+          position: relative;
+          width: 100%;
+          height: 85%;
+          z-index: 999;
+        }
+
+        h1 {
+          opacity: 0.5;
+          font-size: 1em;
+          font-weight: bold;
+        }
+      </style>
+
+      <script>
+        document.addEventListener('DOMContentLoaded', function(){
+
+          var cy = window.cy = cytoscape({
+            container: document.getElementById('cy'),
+            
+            ready: function(){
+              this.nodes().forEach(function(node){
+                //let width = [30, 70, 110];
+                //let size = width[Math.floor(Math.random()*3)];
+                //node.css('width', size);
+                //node.css('height', size);
+              });
+              this.layout({name: 'fcose'}).run();
+            },
+            
+            minZoom: 1e-5,
+			maxZoom: 1e5,
+			wheelSensitivity: 0.1,
+            
+            // demo your layout
+            layout: {
+              name: 'grid'
+              // some more options here...
+            },
+
+            style: [
+              {
+                selector: 'node',
+                style: {
+                  'background-color': '#2B65EC',
+                  label: 'data(txt)',
+                  "font-size": "6px",
+                  width: 'data(size)',
+                  height:'data(size)'
+                }
+              },
+
+              {
+                selector: 'edge',
+                style: {
+                  'width': 3,
+                  'line-color': '#2B65EC',
+                  //'edgeLengthVal':'data(len)'
+                }
+              }
+            ], 
+
+          elements: [{'data':{'id':'192','txt':'creation une filiere de recherche etat a vocation applicative dans les nanotechnologies notamment graphene','size':10.367598856077025}},
+{'data':{'id':'513','txt':'un enseignement pour enfant','size':9.143559338285831}},
+{'data':{'id':'17','txt':'investir lourdement et a long terme sur la recherche visant a se passer des energies fossiles petrole charbon gaz','size':10.617857919547598}},
+{'data':{'id':'318','txt':'carriere scientifique en france','size':9.091444217032327}},
+{'data':{'id':'432','txt':'developper enseignement des metiers manuels','size':8.239329427901795}},
+{'data':{'id':'96','txt':'soutenir reellement la recherche scientifique et technologique public','size':10.005276698438163}},
+{'data':{'id':'555','txt':'creation un comite ethique neutre dans le domaine de la recherche scientifique','size':8.149601735736155}},
+{'data':{'id':'340','txt':'respecter la convention internationnale des droits de enfant','size':9.565424050523422}},
+
+{'data':{'id':'82','sbgnclass':'production','sbgncardinality':0,'source':'318','target':'555'}},
+{'data':{'id':'114','sbgnclass':'production','sbgncardinality':0,'source':'96','target':'555'}},
+{'data':{'id':'171','sbgnclass':'production','sbgncardinality':0,'source':'17','target':'192'}},
+{'data':{'id':'246','sbgnclass':'production','sbgncardinality':0,'source':'432','target':'513'}},
+{'data':{'id':'286','sbgnclass':'production','sbgncardinality':0,'source':'192','target':'555'}},
+{'data':{'id':'451','sbgnclass':'production','sbgncardinality':0,'source':'432','target':'513'}},
+{'data':{'id':'458','sbgnclass':'production','sbgncardinality':0,'source':'96','target':'555'}},
+{'data':{'id':'459','sbgnclass':'production','sbgncardinality':0,'source':'340','target':'513'}}
+
+
+            //{'data':{'id':'e69','sbgnclass':'production','sbgncardinality':0,'source':'192','target':'17'}},
+            //{'data':{'id':'e71','sbgnclass':'production','sbgncardinality':0,'source':'glyph9','target':'glyph1'}}
+            ]});
+          
+          document.getElementById('randomize').addEventListener('click', function(){
+            var layout = cy.layout({
+              name: 'random',
+              animate: true,
+              animationDuration: 1000
+            });
+            
+            layout.run();        
+          });          
+          
+          document.getElementById('layoutButton').addEventListener('click', function(){
+            var layout = cy.layout({
+              name: 'fcose',
+              quality: 'default',
+              randomize: true,
+              animationEasing: 'ease-out',
+            });
+            
+            layout.run();        
+          });
+
+        });
+      </script>
+  </head>
+
+  <body>
+          <h1>cytoscape-fcose demo</h1>
+          
+          <button id='randomize' type='button' style='margin-bottom: 5px'>Randomize</button>&nbsp &nbsp
+          <button id='layoutButton' type='button' style='margin-bottom: 5px'>fCoSE</button>
+      
+          <div id='cy'></div>
+
+  </body>
+
+</html>
